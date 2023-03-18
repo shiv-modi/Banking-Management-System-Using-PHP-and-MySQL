@@ -44,16 +44,19 @@ You can modify the code to meet your specific requirements.
 🟪 User Account :
 
 -> Username : admin123@gmail.com
+
 -> Password : 1234
 
 🟪 Manager Account :
 
 -> Username : manager@manger.com
+
 -> Password : 1234
 
 🟪 Cashier Account :
 
 -> Username : cashier@gmail.com
+
 -> Password : 123
 
 
