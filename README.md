@@ -5,6 +5,31 @@ Note 🔴: - This code has been modified from another project's source code on t
 
 You can modify the code to meet your specific requirements.
 
+🟦 Features :
+
+🌟User Module : 
+      1) Secure Login
+      2) Account Information
+      3) Account Statement
+      4) Funds Transfer
+      5) Account Balance
+      6) Notification
+      7) Edit Profile 
+      8) Change password(Optional)
+      
+ 🌟Manger Module :
+      1) Manager Login
+      2) Add User Account
+      3) Manage User account
+      4) Send Notice to user account
+      5) Get Feedback from user account
+      6) Manage Cashier and Add account
+      
+ 🌟Cashier Module :
+      1) user can widraw or deposit money 
+      
+
+
 🟩 Installation/Setup
 
 1) Open your XAMPP/WAMP's Control Panel and start the Apache and MySQL.
@@ -14,4 +39,5 @@ You can modify the code to meet your specific requirements.
 4) Create a new database naming charusat_bank.
 5) Import the provided SQL file. The file is known as bank.sql located inside the database folder.
 6) Browse the Budget and Expense Tracker System in a browser. i.e. http://localhost/bank.
+
 
