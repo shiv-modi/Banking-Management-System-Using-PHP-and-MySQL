@@ -9,14 +9,14 @@ You can modify the code to meet your specific requirements.
 
 
 🌟User Module : 
-      1) Secure Login
-      2) Account Information
-      3) Account Statement
-      4) Funds Transfer
-      5) Account Balance
-      6) Notification
-      7) Edit Profile 
-      8) Change password(Optional)
+   1) Secure Login
+   2) Account Information
+   3) Account Statement
+   4) Funds Transfer
+   5) Account Balance
+   6) Notification
+   7) Edit Profile 
+   8) Change password(Optional)
       
  🌟Manger Module :
       1) Manager Login
