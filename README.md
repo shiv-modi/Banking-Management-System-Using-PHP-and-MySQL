@@ -29,7 +29,7 @@ You can modify the code to meet your specific requirements.
  🌟Cashier Module :
    1) user can widraw or deposit money 
       
-
+  
 
 🟩 Installation/Setup
 
@@ -58,5 +58,24 @@ You can modify the code to meet your specific requirements.
    -> Username : cashier@gmail.com
 
    -> Password : 123
+   
+   
+   ✨Screenshots :
+    
+    1) User Account :
+    
+       ![user_webpage](https://user-images.githubusercontent.com/126175004/226114663-8b3c5fb9-72b2-4aa6-8f2f-a786f873f8f2.png)
+       
+    2) Manger Account :
+    
+       ![manager_webpage](https://user-images.githubusercontent.com/126175004/226114673-a139130f-efe2-4349-93da-0aae8d7d4e9f.png)
+       
+    3) Cashier Account :
+    
+       ![cashier_webpage](https://user-images.githubusercontent.com/126175004/226114747-a6e3f6dd-6933-4959-a7ab-c579c34ea96a.png)
+
+       
+    
+    
 
 
