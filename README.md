@@ -1,5 +1,5 @@
 # Banking-Mangnagnment-System-Using-PHP-and-MySQL
-This project is for a Banking management system, and it includes three modules: user, manager, and cashier
+This project is entitled Online Bank Management System. This is a web-based application project developed in PHP and MySQL Database. The main goal of this project is to provide the Bank Management and their Account holders to manage and transact online. The application gives an easy way to account holders to manage or monitor their money on their account without actually being there at the bank. The project has a simple and pleasant user interface with the help of Bootstrap Framework v4.It includes three modules: user, manager, and cashier
 
 Note 🔴: - This code has been modified from another project's source code on the web.
 
