@@ -7,8 +7,8 @@ You can modify the code to meet your specific requirements.
 
 🟦 Features :
 
-🌟User Module : 
 
+🌟User Module : 
       1) Secure Login
       2) Account Information
       3) Account Statement
@@ -19,7 +19,6 @@ You can modify the code to meet your specific requirements.
       8) Change password(Optional)
       
  🌟Manger Module :
- 
       1) Manager Login
       2) Add User Account
       3) Manage User account
@@ -28,7 +27,6 @@ You can modify the code to meet your specific requirements.
       6) Manage Cashier and Add account
       
  🌟Cashier Module :
- 
       1) user can widraw or deposit money 
       
 
