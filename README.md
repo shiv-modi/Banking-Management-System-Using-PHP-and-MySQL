@@ -41,16 +41,16 @@ You can modify the code to meet your specific requirements.
 5) Import the provided SQL file. The file is known as charusat_bank.sql located inside the database folder.
 6) Browse the Budget and Expense Tracker System in a browser. i.e. http://localhost/bank.
 
-🟨 User Account :
--> Username : admin123@gmail.com
--> Password : 1234
+🟪 User Account :
+Username : admin123@gmail.com
+Password : 1234
 
-🟨 Manager Account :
--> Username : manager@manger.com
--> Password : 1234
+🟪 Manager Account :
+Username : manager@manger.com
+Password : 1234
 
-🟨 Cashier Account :
--> Username : cashier@gmail.com
--> Password : 123
+🟪 Cashier Account :
+Username : cashier@gmail.com
+Password : 123
 
 
