@@ -38,7 +38,19 @@ You can modify the code to meet your specific requirements.
 3) If you are using XAMPP, copy the extracted source code folder and paste it into the XAMPP's "htdocs" directory. And If you are using WAMP, paste it into the "www" directory.
 4) Browse the PHPMyAdmin in a browser. i.e. http://localhost/phpmyadmin
 4) Create a new database naming charusat_bank.
-5) Import the provided SQL file. The file is known as bank.sql located inside the database folder.
+5) Import the provided SQL file. The file is known as charusat_bank.sql located inside the database folder.
 6) Browse the Budget and Expense Tracker System in a browser. i.e. http://localhost/bank.
+
+🟨 User Account :
+-> Username : admin123@gmail.com
+-> Password : 1234
+
+🟨 Manager Account :
+-> Username : manager@manger.com
+-> Password : 1234
+
+🟨 Cashier Account :
+-> Username : cashier@gmail.com
+-> Password : 123
 
 
