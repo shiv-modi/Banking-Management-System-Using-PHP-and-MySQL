@@ -72,7 +72,13 @@ You can modify the code to meet your specific requirements.
    3) Cashier Account :
    
        ![cashier_webpage](https://user-images.githubusercontent.com/126175004/226114747-a6e3f6dd-6933-4959-a7ab-c579c34ea96a.png)
+      
+## Contributing
 
+You're all welcome to contribute to this project! Whether it's fixing bugs, improving existing features, or suggesting new ideas—every bit helps. Feel free to fork the repo, open issues, or submit pull requests.
+
+Let's make this project better togethe
+r!
        
     
     
