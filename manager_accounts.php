@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['loginid'])){ header('location:manager_login.php');}
+if(!isset($_SESSION['loginid'])){ header('location:manager_login.php'); exit; }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -26,7 +26,9 @@ if(!isset($_SESSION['loginid'])){ header('location:manager_login.php');}
   
   <?php if (isset($_GET['delete'])) 
   {
-    if ($con->query("delete from feedback where feedbackid = '$_GET[delete]'"))
+    $stmt = $con->prepare("delete from feedback where feedbackid = ?");
+    $stmt->bind_param("i", $_GET['delete']);
+    if ($stmt->execute())
     {
       header("location:manager_feedback.php");
     }
@@ -188,15 +190,24 @@ dl, ol, ul {
 <?php
 if (isset($_POST['saveAccount']))
 {
-  if (!$con->query("insert into login (email,password,type) values ('$_POST[email]','$_POST[password]','cashier')")) {
+  $stmt = $con->prepare("insert into login (email,password,type) values (?,?,?)");
+  $type = 'cashier';
+  $stmt->bind_param("sss", $_POST['email'], $_POST['password'], $type);
+  if (!$stmt->execute()) {
     echo "<div claass='alert alert-success'>Failed. Error is:".$con->error."</div>";
   }
 }
 if (isset($_GET['del']) && !empty($_GET['del']))
 {
-  $con->query("delete from login where id ='$_GET[del]'");
+  $stmt = $con->prepare("delete from login where id = ?");
+  $stmt->bind_param("i", $_GET['del']);
+  $stmt->execute();
 }
-  $array = $con->query("select * from login where type='cashier'");
+  $stmt = $con->prepare("select * from login where type = ?");
+  $type = 'cashier';
+  $stmt->bind_param("s", $type);
+  $stmt->execute();
+  $array = $stmt->get_result();
   
  ?>
 <div class="container">

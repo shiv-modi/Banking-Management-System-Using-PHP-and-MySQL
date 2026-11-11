@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['loginid'])){ header('location:manager_login.php');}
+if(!isset($_SESSION['loginid'])){ header('location:manager_login.php'); exit; }
 ?>
 <script type="text/javascript" language="javascript">
 $previous=window.history.forward(1);
@@ -33,7 +33,10 @@ break;
 
     <?php
   $con = new mysqli('localhost','root','','charusat_bank');
-  $array = $con->query("select * from useraccounts  where useraccounts.id = '$_GET[id]'");
+  $stmt = $con->prepare("select * from useraccounts where useraccounts.id = ?");
+  $stmt->bind_param("i", $_GET['id']);
+  $stmt->execute();
+  $array = $stmt->get_result();
   $row = $array->fetch_assoc();
 ?>
 
@@ -76,7 +79,9 @@ break;
  <?php
      if (isset($_POST['send']))
          {
-           if ($con->query("insert into notice (notice,userid) values ('$_POST[notice]','$_POST[userid]')")) {
+           $stmt = $con->prepare("insert into notice (notice,userid) values (?,?)");
+           $stmt->bind_param("si", $_POST['notice'], $_POST['userid']);
+           if ($stmt->execute()) {
            echo "<div  class='alert alert-success'>Successfully send</div> ";
            echo "<div  class='alert '>Page Redirect in 3 Second</div> ";
            header('refresh:3; url=manager_home.php ');

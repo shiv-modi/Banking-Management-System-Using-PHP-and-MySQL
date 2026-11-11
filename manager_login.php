@@ -19,7 +19,10 @@ $con = new mysqli('localhost','root','','charusat_bank');
           $user = $_POST['email'];
         $pass = $_POST['password'];
        
-        $result = $con->query("select * from manager where email='$user' AND password='$pass' AND type='manager'");
+        $stmt = $con->prepare("select * from manager where email = ? AND password = ? AND type = 'manager'");
+        $stmt->bind_param("ss", $user, $pass);
+        $stmt->execute();
+        $result = $stmt->get_result();
         if($result->num_rows>0)
         { 
           session_start();
@@ -27,6 +30,7 @@ $con = new mysqli('localhost','root','','charusat_bank');
           $_SESSION['loginid']=$data['id'];
           //$_SESSION['user'] = $data;
           header('location:manager_home.php');
+          exit;
          }
         else
         {

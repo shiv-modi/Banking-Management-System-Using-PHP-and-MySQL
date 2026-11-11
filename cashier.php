@@ -20,7 +20,10 @@ if (isset($_POST['cashierLogin']))
   			$user = $_POST['email'];
 		    $pass = $_POST['password'];
 		   
-		    $result = $con->query("select * from login where email='$user' AND password='$pass'");
+		    $stmt = $con->prepare("select * from login where email = ? AND password = ?");
+		    $stmt->bind_param("ss", $user, $pass);
+		    $stmt->execute();
+		    $result = $stmt->get_result();
 		    if($result->num_rows>0)
 		    { 
 		      session_start();
@@ -28,6 +31,7 @@ if (isset($_POST['cashierLogin']))
 		      $_SESSION['cashid']=$data['id'];
 		      //$_SESSION['user'] = $data;
 		      header('location:cashier_index.php');
+		      exit;
 		     }
 		    else
 		    {

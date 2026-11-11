@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['userid'])){ header('location:login.php');}
+if(!isset($_SESSION['userid'])){ header('location:login.php'); exit; }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +26,10 @@ if(!isset($_SESSION['userid'])){ header('location:login.php');}
 
  $con = new mysqli('localhost','root','','charusat_bank');
 
- $ar = $con->query("select * from useraccounts where id = '$_SESSION[userid]'");
+ $stmt = $con->prepare("select * from useraccounts where id = ?");
+ $stmt->bind_param("i", $_SESSION['userid']);
+ $stmt->execute();
+ $ar = $stmt->get_result();
  $userData = $ar->fetch_assoc();
 
  ?>
@@ -188,7 +191,10 @@ b, strong {
         <?php 
  $con = new mysqli('localhost','root','','charusat_bank');
 
- $ar = $con->query("select * from useraccounts where id = '$_SESSION[userid]'");
+ $stmt = $con->prepare("select * from useraccounts where id = ?");
+ $stmt->bind_param("i", $_SESSION['userid']);
+ $stmt->execute();
+ $ar = $stmt->get_result();
  $userData = $ar->fetch_assoc();
 
  ?>
