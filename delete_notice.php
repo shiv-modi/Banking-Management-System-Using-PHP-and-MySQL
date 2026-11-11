@@ -8,8 +8,9 @@ $dbName = 'charusat_bank';
 $dbUsername = 'root'; 
 $dbPassword = '';  
 $mysqli = mysqli_connect($host, $dbUsername, $dbPassword, $dbName);
-$id = $_GET['id'];
-if($con->query("delete  from notice where userid = '$_SESSION[userid]'order by id desc ")){
+$stmt = $con->prepare("delete from notice where userid = ?");
+$stmt->bind_param("i", $_SESSION['userid']);
+if($stmt->execute()){
 
     echo ("<script LANGUAGE='JavaScript'>
     window.alert('Data Successfully Deleted');

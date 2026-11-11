@@ -24,7 +24,10 @@
   			$user = $_POST['email'];
 		    $pass = $_POST['password'];
 		   
-		    $result = $con->query("select * from userAccounts where email='$user' AND password='$pass'");
+		    $stmt = $con->prepare("select * from userAccounts where email = ? AND password = ?");
+		    $stmt->bind_param("ss", $user, $pass);
+		    $stmt->execute();
+		    $result = $stmt->get_result();
 		    if($result->num_rows>0)
 		    { 
 		      session_start();
@@ -32,6 +35,7 @@
 		      $_SESSION['userid']=$data['id'];
 		      $_SESSION['user'] = $data;
 		      header('location:home.php?id='.$_SESSION['userid']);
+		      exit;
 		     }
 		    else
 		    {

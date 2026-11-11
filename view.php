@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['loginid'])){ header('location:manager_login.php');}
+if(!isset($_SESSION['loginid'])){ header('location:manager_login.php'); exit; }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -177,7 +177,10 @@ dl, ol, ul {
 <?php 
 
   $con = new mysqli('localhost','root','','charusat_bank');
-  $array = $con->query("select * from useraccounts  where useraccounts.id = '$_GET[id]'");
+  $stmt = $con->prepare("select * from useraccounts where useraccounts.id = ?");
+  $stmt->bind_param("i", $_GET['id']);
+  $stmt->execute();
+  $array = $stmt->get_result();
   $row = $array->fetch_assoc();
  ?>
  <br>

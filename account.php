@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-if(!isset($_SESSION['userid'])){ header('location:login.php');}
+if(!isset($_SESSION['userid'])){ header('location:login.php'); exit; }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -164,7 +164,10 @@ b, strong {
     <?php 
  $con = new mysqli('localhost','root','','charusat_bank');
 
- $ar = $con->query("select * from useraccounts where id = '$_SESSION[userid]'");
+ $stmt = $con->prepare("select * from useraccounts where id = ?");
+ $stmt->bind_param("i", $_SESSION['userid']);
+ $stmt->execute();
+ $ar = $stmt->get_result();
  $userData = $ar->fetch_assoc();
 
  ?>
@@ -197,7 +200,9 @@ b, strong {
       <?php
     if (isset($_POST['send']))
     {
-      if ($con->query("insert into feedback (message,userid) values ('$_POST[msg]','$_SESSION[userid]')")) {
+      $stmt = $con->prepare("insert into feedback (message,userid) values (?,?)");
+      $stmt->bind_param("si", $_POST['msg'], $_SESSION['userid']);
+      if ($stmt->execute()) {
         echo '<script>alert("Message send Succesfully")</script>';
       }else
       echo "<div class='alert alert-danger'>Not sent Error is:".$con->error."</div>";
@@ -231,7 +236,10 @@ b, strong {
    <?php 
  $con = new mysqli('localhost','root','','charusat_bank');
 
- $ar = $con->query("select * from useraccounts where id = '$_SESSION[userid]'");
+ $stmt = $con->prepare("select * from useraccounts where id = ?");
+ $stmt->bind_param("i", $_SESSION['userid']);
+ $stmt->execute();
+ $ar = $stmt->get_result();
  $userData = $ar->fetch_assoc();
 
  ?>

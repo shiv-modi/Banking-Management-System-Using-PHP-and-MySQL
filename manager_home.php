@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-if(!isset($_SESSION['loginid'])){ header('location:manager_login.php');}
+if(!isset($_SESSION['loginid'])){ header('location:manager_login.php'); exit; }
 ?>
 <!DOCTYPE html>
 <!-- Created By CodingNepal -->
@@ -212,7 +212,9 @@ dl, ol, ul {
            $con = new mysqli('localhost','root','','charusat_bank');
            if (isset($_GET['delete'])) 
   {
-    if ($con->query("delete from useraccounts where id = '$_GET[delete]'"))
+    $stmt = $con->prepare("delete from useraccounts where id = ?");
+    $stmt->bind_param("i", $_GET['delete']);
+    if ($stmt->execute())
     {
      
     }
@@ -223,10 +225,14 @@ dl, ol, ul {
           <?php
            $con = new mysqli('localhost','root','','charusat_bank');
 
-           $ar = $con->query("select * from userAccounts");
+           $stmt = $con->prepare("select * from userAccounts");
+           $stmt->execute();
+           $ar = $stmt->get_result();
            $userData = $ar->fetch_assoc();
       $i=0;
-      $array = $con->query("select * from useraccounts");
+      $stmt = $con->prepare("select * from useraccounts");
+      $stmt->execute();
+      $array = $stmt->get_result();
       if ($array->num_rows > 0)
       {
         while ($row = $array->fetch_assoc())

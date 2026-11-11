@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['userid'])){ header('location:login.php');}
+if(!isset($_SESSION['userid'])){ header('location:login.php'); exit; }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +21,10 @@ if(!isset($_SESSION['userid'])){ header('location:login.php');}
    <?php 
  $con = new mysqli('localhost','root','','charusat_bank');
 
- $ar = $con->query("select * from useraccounts where id = '$_SESSION[userid]'");
+ $stmt = $con->prepare("select * from useraccounts where id = ?");
+ $stmt->bind_param("i", $_SESSION['userid']);
+ $stmt->execute();
+ $ar = $stmt->get_result();
  $userData = $ar->fetch_assoc();
 
  ?>
@@ -81,7 +84,9 @@ if(!isset($_SESSION['userid'])){ header('location:login.php');}
       <?php
     if (isset($_POST['send']))
     {
-      if ($con->query("insert into feedback (message,userid) values ('$_POST[msg]','$_SESSION[userid]')")) {
+      $stmt = $con->prepare("insert into feedback (message,userid) values (?,?)");
+      $stmt->bind_param("si", $_POST['msg'], $_SESSION['userid']);
+      if ($stmt->execute()) {
         echo '<script>alert("Message send Succesfully")</script>';
       }else
       echo "<div class='alert alert-danger'>Not sent Error is:".$con->error."</div>";
@@ -278,8 +283,14 @@ b, strong {
                           </div>
                           <?php if (isset($_POST['get'])) 
       {
-        $array2 = $con->query("select * from otheraccounts where accountno = '$_POST[otherNo]'");
-        $array3 = $con->query("select * from useraccounts where accountno = '$_POST[otherNo]'");
+        $stmt = $con->prepare("select * from otheraccounts where accountno = ?");
+        $stmt->bind_param("s", $_POST['otherNo']);
+        $stmt->execute();
+        $array2 = $stmt->get_result();
+        $stmt = $con->prepare("select * from useraccounts where accountno = ?");
+        $stmt->bind_param("s", $_POST['otherNo']);
+        $stmt->execute();
+        $array3 = $stmt->get_result();
         {
           if ($array2->num_rows > 0) 
           { $row2 = $array2->fetch_assoc();
@@ -351,7 +362,10 @@ b, strong {
       makeTransaction('transfer',$amount,$_POST['otherNo']);
       echo "<script>alert('Transfer Successfull');window.location.href='funds_transfer.php'</script>";
     }
-      $array = $con->query("select * from transaction where userid = '$userData[id]' AND action = 'transfer' order by date desc");
+      $stmt = $con->prepare("select * from transaction where userid = ? AND action = 'transfer' order by date desc");
+      $stmt->bind_param("i", $userData['id']);
+      $stmt->execute();
+      $array = $stmt->get_result();
       if ($array ->num_rows > 0) 
       {
          while ($row = $array->fetch_assoc()) 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['loginid'])){ header('location:manager_login.php');}
+if(!isset($_SESSION['loginid'])){ header('location:manager_login.php'); exit; }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -207,7 +207,14 @@ if (isset($_POST['submit']))
 {
     
     
-  if (!$conn->query("insert into useraccounts (name,aadhaar,gender,email,phonenumber,city,address,password,profile,dob,accountno,accounttype,deposit,occupation) values('$_POST[name]','$_POST[aadhaar]','$_POST[gender]','$_POST[email]','$_POST[phonenumber]','$_POST[city]','$_POST[address]','$_POST[password]','$_POST[profile]','$_POST[dob]','$_POST[accountno]','$_POST[accounttype]','$_POST[deposit]','$_POST[occupation]')")) {
+  $stmt = $conn->prepare("insert into useraccounts (name,aadhaar,gender,email,phonenumber,city,address,password,profile,dob,accountno,accounttype,deposit,occupation) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+  $success = $stmt->execute([
+    $_POST['name'], $_POST['aadhaar'], $_POST['gender'], $_POST['email'],
+    $_POST['phonenumber'], $_POST['city'], $_POST['address'], $_POST['password'],
+    $_POST['profile'], $_POST['dob'], $_POST['accountno'], $_POST['accounttype'],
+    $_POST['deposit'], $_POST['occupation']
+  ]);
+  if (!$success) {
     
     echo "<div claass='alert alert-success'>Failed. Error is:".$conn->error."</div>";
    
@@ -221,7 +228,8 @@ if (isset($_POST['submit']))
 
 if (isset($_GET['del']) && !empty($_GET['del']))
 {
-  $con->query("delete from login where id ='$_GET[del]'");
+  $stmt = $conn->prepare("delete from login where id = ?");
+  $stmt->execute([(int) $_GET['del']]);
 }
   
 

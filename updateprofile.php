@@ -16,9 +16,10 @@ $db = "charusat_bank";
 
 $conn = new mysqli($servername, $username, $password, $db);
 
-$sql = "update useraccounts set dob='$dob',email='$email',phonenumber='$phonenumber',occupation = '$occupation', city = '$city' where id='$_SESSION[userid]'";
+$stmt = $conn->prepare("update useraccounts set dob = ?, email = ?, phonenumber = ?, occupation = ?, city = ? where id = ?");
+$stmt->bind_param("sssssi", $dob, $email, $phonenumber, $occupation, $city, $_SESSION['userid']);
 
-if ($conn->query($sql) === TRUE) {
+if ($stmt->execute()) {
     
     echo ("<script LANGUAGE='JavaScript'>
     window.alert('Data Successfully Updated');

@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-if(!isset($_SESSION['loginid'])){ header('location:manager_login.php');}
+if(!isset($_SESSION['loginid'])){ header('location:manager_login.php'); exit; }
 ?>
 <!DOCTYPE html>
 <!-- Created By CodingNepal -->
@@ -28,7 +28,9 @@ if(!isset($_SESSION['loginid'])){ header('location:manager_login.php');}
   
   <?php if (isset($_GET['delete'])) 
   {
-    if ($con->query("delete from feedback where feedbackid = '$_GET[delete]'"))
+    $stmt = $con->prepare("delete from feedback where feedbackid = ?");
+    $stmt->bind_param("i", $_GET['delete']);
+    if ($stmt->execute())
     {
       header("location:manager_feedback.php");
     }
@@ -212,7 +214,9 @@ dl, ol, ul {
       $i=0;
       $con = new mysqli('localhost','root','','charusat_bank');
 
-      $array = $con->query("select * from useraccounts,feedback where useraccounts.id = feedback.userid");
+      $stmt = $con->prepare("select * from useraccounts,feedback where useraccounts.id = feedback.userid");
+      $stmt->execute();
+      $array = $stmt->get_result();
       if ($array->num_rows > 0)
       {
         while ($row = $array->fetch_assoc())

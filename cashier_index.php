@@ -1,7 +1,7 @@
 <?php
     $con = new mysqli('localhost','root','','charusat_bank');
 session_start();
-if(!isset($_SESSION['cashid'])){ header('location:cashier_index.php');}
+if(!isset($_SESSION['cashid'])){ header('location:cashier.php'); exit; }
 ?><!DOCTYPE html>
 
 <html lang="en">
@@ -236,8 +236,14 @@ dl, ol, ul {
                         </form>
                         <?php if (isset($_POST['get'])) 
       {
-        $array2 = $con->query("select * from otheraccounts where accountno = '$_POST[otherNo]'");
-        $array3 = $con->query("select * from userAccounts where accountno = '$_POST[otherNo]'");
+        $stmt = $con->prepare("select * from otheraccounts where accountno = ?");
+        $stmt->bind_param("s", $_POST['otherNo']);
+        $stmt->execute();
+        $array2 = $stmt->get_result();
+        $stmt = $con->prepare("select * from userAccounts where accountno = ?");
+        $stmt->bind_param("s", $_POST['otherNo']);
+        $stmt->execute();
+        $array3 = $stmt->get_result();
         {
           if ($array2->num_rows > 0) 
           { $row2 = $array2->fetch_assoc();
