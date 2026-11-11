@@ -192,7 +192,8 @@ if (isset($_POST['saveAccount']))
 {
   $stmt = $con->prepare("insert into login (email,password,type) values (?,?,?)");
   $type = 'cashier';
-  $stmt->bind_param("sss", $_POST['email'], $_POST['password'], $type);
+  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  $stmt->bind_param("sss", $_POST['email'], $password, $type);
   if (!$stmt->execute()) {
     echo "<div claass='alert alert-success'>Failed. Error is:".$con->error."</div>";
   }
@@ -233,7 +234,7 @@ if (isset($_GET['del']) && !empty($_GET['del']))
             {
               echo "<tr>";
               echo "<td>".$row['email']."</td>";
-              echo "<td>".$row['password']."</td>";
+              echo "<td>[hidden]</td>";
               echo "<td>".$row['type']."</td>";
               echo "<td><a href='manager_accounts.php?del=$row[id]' class='btn btn-danger btn-sm'>Delete</a></td>";
               echo "</tr>";

@@ -52,7 +52,7 @@ INSERT INTO `feedback` (`feedbackid`, `message`, `userid`, `date`) VALUES
 CREATE TABLE `login` (
   `id` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `type` varchar(100) NOT NULL DEFAULT 'cashier',
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -62,7 +62,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `email`, `password`, `type`, `date`) VALUES
-(3, 'cashier@gmail.com', '123', 'cashier', '2022-11-10 05:15:51');
+(3, 'cashier@gmail.com', '$2y$12$.SL2LLTjNHfIwYEJvbg2Pe/ry7sfidVkEt6yH0mqN3UUbb4fpjgsm', 'cashier', '2022-11-10 05:15:51');
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,7 @@ INSERT INTO `login` (`id`, `email`, `password`, `type`, `date`) VALUES
 CREATE TABLE `manager` (
   `id` int(10) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` int(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `type` varchar(100) NOT NULL DEFAULT 'manager',
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -83,7 +83,7 @@ CREATE TABLE `manager` (
 --
 
 INSERT INTO `manager` (`id`, `email`, `password`, `type`, `date`) VALUES
-(1, 'manager@manager.com', 1234, 'manager', '2022-10-07 08:13:42');
+(1, 'manager@manager.com', '$2y$12$7P0nWFo.Y/hXRvtD71mR9ecXPOuCxAxC21zII6BTnxU0fyiRaQWJ.', 'manager', '2022-10-07 08:13:42');
 
 -- --------------------------------------------------------
 
@@ -203,7 +203,7 @@ CREATE TABLE `useraccounts` (
   `phonenumber` varchar(20) NOT NULL,
   `city` varchar(20) NOT NULL,
   `address` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `profile` varchar(50) NOT NULL,
   `dob` date DEFAULT NULL,
   `accountno` int(30) NOT NULL,
@@ -219,7 +219,7 @@ CREATE TABLE `useraccounts` (
 --
 
 INSERT INTO `useraccounts` (`id`, `name`, `aadhaar`, `gender`, `email`, `phonenumber`, `city`, `address`, `password`, `profile`, `dob`, `accountno`, `accounttype`, `deposit`, `branch`, `occupation`, `time`) VALUES
-(59, 'admin', '122225656525', 'Male', 'admin123@gmail.com', '6569556688', 'mumbai', '33, hihi society ', '1234', 'charusat_symbol.jpg', '2023-03-08', 1679149486, 'Saving', 1000, '', 'Bussiness', '2023-03-18 14:41:04');
+(59, 'admin', '122225656525', 'Male', 'admin123@gmail.com', '6569556688', 'mumbai', '33, hihi society ', '$2y$12$7P0nWFo.Y/hXRvtD71mR9ecXPOuCxAxC21zII6BTnxU0fyiRaQWJ.', 'charusat_symbol.jpg', '2023-03-08', 1679149486, 'Saving', 1000, '', 'Bussiness', '2023-03-18 14:41:04');
 
 --
 -- Indexes for dumped tables

@@ -210,7 +210,7 @@ if (isset($_POST['submit']))
   $stmt = $conn->prepare("insert into useraccounts (name,aadhaar,gender,email,phonenumber,city,address,password,profile,dob,accountno,accounttype,deposit,occupation) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
   $success = $stmt->execute([
     $_POST['name'], $_POST['aadhaar'], $_POST['gender'], $_POST['email'],
-    $_POST['phonenumber'], $_POST['city'], $_POST['address'], $_POST['password'],
+    $_POST['phonenumber'], $_POST['city'], $_POST['address'], password_hash($_POST['password'], PASSWORD_DEFAULT),
     $_POST['profile'], $_POST['dob'], $_POST['accountno'], $_POST['accounttype'],
     $_POST['deposit'], $_POST['occupation']
   ]);

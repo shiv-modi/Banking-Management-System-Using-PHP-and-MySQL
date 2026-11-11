@@ -13,20 +13,17 @@
 
 <?php
 $con = new mysqli('localhost','root','','charusat_bank');
+require_once 'includes/auth.php';
 	if (isset($_POST['login']))
     {
         $error = "";
           $user = $_POST['email'];
         $pass = $_POST['password'];
        
-        $stmt = $con->prepare("select * from manager where email = ? AND password = ? AND type = 'manager'");
-        $stmt->bind_param("ss", $user, $pass);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if($result->num_rows>0)
+        $data = authenticate($con, 'manager', $user, $pass, 'manager');
+        if($data)
         { 
           session_start();
-          $data = $result->fetch_assoc();
           $_SESSION['loginid']=$data['id'];
           //$_SESSION['user'] = $data;
           header('location:manager_home.php');

@@ -1,6 +1,8 @@
 <?php
 session_start();
 if(!isset($_SESSION['userid'])){ header('location:login.php'); exit; }
+$con = new mysqli('localhost','root','','charusat_bank');
+require_once 'includes/auth.php';
 ?>
 
   
@@ -12,14 +14,10 @@ if(!isset($_SESSION['userid'])){ header('location:login.php'); exit; }
         $user = $_POST['email'];
         $pass = $_POST['password'];
        
-        $stmt = $con->prepare("select * from useraccounts where email = ? AND password = ?");
-        $stmt->bind_param("ss", $user, $pass);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if($result->num_rows>0)
+        $data = authenticate($con, 'useraccounts', $user, $pass);
+        if($data)
         { 
           session_start();
-          $data = $result->fetch_assoc();
           $_SESSION['userid']=$data['id'];
           $_SESSION['user'] = $data;
           header('location:index.php');

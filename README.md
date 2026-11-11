@@ -41,6 +41,18 @@ You can modify the code to meet your specific requirements.
 5) Import the provided SQL file. The file is known as charusat_bank.sql located inside the database folder.
 6) Browse the Budget and Expense Tracker System in a browser. i.e. http://localhost/bank.
 
+Password fields use `password_hash()` and `password_verify()`. For an existing
+database, widen the password columns before deploying:
+
+```sql
+ALTER TABLE useraccounts MODIFY password VARCHAR(255) NOT NULL;
+ALTER TABLE login MODIFY password VARCHAR(255) NOT NULL;
+ALTER TABLE manager MODIFY password VARCHAR(255) NOT NULL;
+```
+
+Existing legacy plaintext credentials are upgraded to hashes after a successful
+login. New accounts are stored as hashes immediately.
+
 🟪 User Account :
 
    -> Username : admin123@gmail.com
